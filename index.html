@@ -42,7 +42,7 @@
     <meta property="og:url" content="https://tvoy-magazin.ru/">
     <meta property="og:title" content="Магазин Твой — Продуктовый магазин в селе Поповка">
     <meta property="og:description" content="Продуктовый магазин Твой в селе Поповка. Свежие продукты, качественные товары, парковка, пандус, беседка. Ежедневно 8:00-22:00">
-    <meta property="og:image" content="https://tvoy-magazin.ru/TVOY.png">
+    <meta property="og:image" content="https://tvoy-magazin.ru/tvoy.png">
     <meta property="og:image:width" content="500">
     <meta property="og:image:height" content="500">
     <meta property="og:image:alt" content="Магазин Твой - продуктовый магазин в селе Поповка">
@@ -55,15 +55,15 @@
     <meta name="twitter:url" content="https://tvoy-magazin.ru/">
     <meta name="twitter:title" content="Магазин Твой — Продуктовый магазин в селе Поповка">
     <meta name="twitter:description" content="Продуктовый магазин в селе Поповка. Свежие продукты, парковка, пандус, беседка. 8:00-22:00">
-    <meta name="twitter:image" content="https://tvoy-magazin.ru/TVOY.png">
+    <meta name="twitter:image" content="https://tvoy-magazin.ru/tvoy.png">
 
     <!-- Favicon - логотип магазина -->
-    <link rel="icon" type="image/jpeg" href="logo_full.jpg">
-    <link rel="icon" type="image/jpeg" sizes="16x16" href="logo_full.jpg">
-    <link rel="icon" type="image/jpeg" sizes="32x32" href="logo_full.jpg">
-    <link rel="icon" type="image/jpeg" sizes="48x48" href="logo_full.jpg">
-    <link rel="apple-touch-icon" href="logo_full.jpg">
-    <meta name="msapplication-TileImage" content="logo_full.jpg">
+    <link rel="icon" type="image/jpeg" href="logo-full.jpg">
+    <link rel="icon" type="image/jpeg" sizes="16x16" href="logo-full.jpg">
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="logo-full.jpg">
+    <link rel="icon" type="image/jpeg" sizes="48x48" href="logo-full.jpg">
+    <link rel="apple-touch-icon" href="logo-full.jpg">
+    <meta name="msapplication-TileImage" content="logo-full.jpg">
     <meta name="msapplication-TileColor" content="#C3161D">
 
     <!-- Preconnect -->
@@ -71,7 +71,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Preload LCP-изображение (главное фото в первом экране) -->
-    <link rel="preload" as="image" href="TVOY.png" fetchpriority="high">
+    <link rel="preload" as="image" href="tvoy.webp" type="image/webp" fetchpriority="high">
 
     <!-- Fonts: Calistoga (тёплый выразительный заголовочный шрифт) + Manrope (чистый читаемый текст) -->
     <!-- Грузим CSS шрифтов асинхронно, чтобы он не блокировал отрисовку страницы -->
@@ -85,8 +85,8 @@
         "@type": ["GroceryStore", "LocalBusiness"],
         "name": "Магазин Твой",
         "alternateName": "Твой",
-        "image": "https://tvoy-magazin.ru/TVOY.png",
-        "logo": "https://tvoy-magazin.ru/logo_full.jpg",
+        "image": "https://tvoy-magazin.ru/tvoy.png",
+        "logo": "https://tvoy-magazin.ru/logo-full.jpg",
         "url": "https://tvoy-magazin.ru/",
         "description": "Продуктовый магазин Твой в селе Поповка Тульской области. Свежие продукты, качественные товары первой необходимости, парковка, пандус, беседка. Работаем ежедневно с 8:00 до 22:00.",
         "priceRange": "$$",
@@ -178,7 +178,7 @@
     <nav class="nav" id="nav" role="navigation" aria-label="Основная навигация">
         <div class="nav-container">
             <a href="#" class="nav-logo" aria-label="На главную">
-                <img src="logo_full.jpg" alt="Логотип продуктового магазина Твой в селе Поповка" width="48" height="48" loading="eager">
+                <img src="logo-full.jpg" alt="Логотип продуктового магазина Твой в селе Поповка" width="48" height="48" loading="eager">
                 <span class="nav-logo-tagline">продукты рядом с домом</span>
             </a>
             <ul class="nav-links">
@@ -252,7 +252,10 @@
             </div>
             <div class="hero-visual animate-on-scroll">
                 <div class="hero-image-wrapper">
-                    <img src="TVOY.png" alt="Продуктовый магазин Твой в селе Поповка - витрина и товары" class="hero-image" width="480" height="360" loading="eager" fetchpriority="high">
+                    <picture>
+                        <source srcset="tvoy.webp" type="image/webp">
+                        <img src="tvoy-fallback.png" alt="Продуктовый магазин Твой в селе Поповка - витрина и товары" class="hero-image" width="480" height="360" loading="eager" fetchpriority="high">
+                    </picture>
                     <div class="hero-badge">
                         <div class="hero-badge-icon">
                             <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-clock"></use></svg>
@@ -364,7 +367,10 @@
         <div class="about-bg"></div>
         <div class="about-content">
             <div class="about-image-wrapper animate-on-scroll">
-                <img src="TVOY.png" alt="Свежие продукты и товары в магазине Твой, село Поповка, Тульская область" class="about-image" width="540" height="405" loading="lazy">
+                <picture>
+                    <source srcset="tvoy.webp" type="image/webp">
+                    <img src="tvoy-fallback.png" alt="Свежие продукты и товары в магазине Твой, село Поповка, Тульская область" class="about-image" width="540" height="405" loading="lazy">
+                </picture>
                 <div class="about-image-overlay">
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-map-marker"></use></svg>
                     <div>
@@ -554,7 +560,7 @@
         <div class="footer-content">
             <div>
                 <div class="footer-brand">
-                    <img src="logo_full.jpg" alt="Магазин Твой - продуктовый магазин, село Поповка" width="56" height="56" loading="lazy">
+                    <img src="logo-full.jpg" alt="Магазин Твой - продуктовый магазин, село Поповка" width="56" height="56" loading="lazy">
                     <span class="footer-brand-name">Твой</span>
                 </div>
                 <p class="footer-text">Продуктовый магазин в селе Поповка. Свежие продукты и качественные товары для вас и вашей семьи.</p>
