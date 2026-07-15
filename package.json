@@ -1,0 +1,14 @@
+{
+  "name": "tvoy-storefront",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Статический сайт продуктового магазина «Твой»",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

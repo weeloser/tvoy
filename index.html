@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +11,7 @@
          report-uri политику нужно отдавать настоящими HTTP-заголовками
          на сервере/хостинге (см. рекомендации в ответе). -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://yandex.ru; object-src 'none'; base-uri 'self'; form-action 'self'; trusted-types 'none'; require-trusted-types-for 'script'">
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
 
     <!-- Primary Meta Tags -->
     <title>Магазин Твой — Продуктовый магазин в селе Поповка | Алексинский район, Тульская область</title>
@@ -42,11 +43,11 @@
     <meta property="og:url" content="https://tvoy-magazin.ru/">
     <meta property="og:title" content="Магазин Твой — Продуктовый магазин в селе Поповка">
     <meta property="og:description" content="Продуктовый магазин Твой в селе Поповка. Свежие продукты, качественные товары, парковка, пандус, беседка. Ежедневно 8:00-22:00">
-    <meta property="og:image" content="https://tvoy-magazin.ru/tvoy.png">
-    <meta property="og:image:width" content="500">
-    <meta property="og:image:height" content="500">
+    <meta property="og:image" content="https://tvoy-magazin.ru/tvoy-1600.jpg">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="1200">
     <meta property="og:image:alt" content="Магазин Твой - продуктовый магазин в селе Поповка">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:site_name" content="Магазин Твой">
 
@@ -55,7 +56,7 @@
     <meta name="twitter:url" content="https://tvoy-magazin.ru/">
     <meta name="twitter:title" content="Магазин Твой — Продуктовый магазин в селе Поповка">
     <meta name="twitter:description" content="Продуктовый магазин в селе Поповка. Свежие продукты, парковка, пандус, беседка. 8:00-22:00">
-    <meta name="twitter:image" content="https://tvoy-magazin.ru/tvoy.png">
+    <meta name="twitter:image" content="https://tvoy-magazin.ru/tvoy-1600.jpg">
 
     <!-- Favicon - логотип магазина -->
     <link rel="icon" type="image/jpeg" href="logo_full.jpg">
@@ -71,12 +72,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Preload LCP-изображение (главное фото в первом экране) -->
-    <link rel="preload" as="image" href="tvoy.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="tvoy.webp" imagesrcset="tvoy.webp 750w, tvoy-1600.webp 1600w" imagesizes="(max-width: 960px) 94vw, 55vw" type="image/webp" fetchpriority="high">
 
-    <!-- Fonts: Calistoga (тёплый выразительный заголовочный шрифт) + Manrope (чистый читаемый текст) -->
+    <!-- Fonts: Bitter (тёплая выразительная кириллица) + Manrope (чистый читаемый текст) -->
     <!-- Грузим CSS шрифтов асинхронно, чтобы он не блокировал отрисовку страницы -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Calistoga&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -85,7 +86,7 @@
         "@type": ["GroceryStore", "LocalBusiness"],
         "name": "Магазин Твой",
         "alternateName": "Твой",
-        "image": "https://tvoy-magazin.ru/tvoy.png",
+        "image": "https://tvoy-magazin.ru/tvoy-1600.jpg",
         "logo": "https://tvoy-magazin.ru/logo_full.jpg",
         "url": "https://tvoy-magazin.ru/",
         "description": "Продуктовый магазин Твой в селе Поповка Тульской области. Свежие продукты, качественные товары первой необходимости, парковка, пандус, беседка. Работаем ежедневно с 8:00 до 22:00.",
@@ -579,8 +580,10 @@
             .scroll-progress { display: none; }
         }
     </style>
+    <link rel="stylesheet" href="premium.css">
 </head>
 <body>
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
     <div class="scroll-progress" aria-hidden="true"></div>
     <!-- Инлайн SVG-спрайт иконок (вместо внешнего Font Awesome — быстрее и без блокирующих запросов) -->
     <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
@@ -615,7 +618,7 @@
     <!-- Navigation -->
     <nav class="nav" id="nav" role="navigation" aria-label="Основная навигация">
         <div class="nav-container">
-            <a href="#" class="nav-logo" aria-label="На главную">
+            <a href="#home" class="nav-logo" aria-label="На главную">
                 <img src="logo-sm.jpg" alt="Логотип продуктового магазина Твой в селе Поповка" width="48" height="48" loading="eager" fetchpriority="high">
                 <span class="nav-logo-tagline">продукты рядом с домом</span>
             </a>
@@ -629,7 +632,7 @@
                 <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
                 <span>+7 902 909-38-79</span>
             </a>
-            <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
+            <button type="button" class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -638,11 +641,17 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Меню">
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Меню" aria-hidden="true">
         <div class="mobile-menu-content">
-            <button class="mobile-menu-close" id="menuClose" aria-label="Закрыть">
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-times"></use></svg>
-            </button>
+            <div class="mobile-menu-head">
+                <div class="mobile-menu-brand">
+                    <img src="logo-sm.jpg" alt="" width="48" height="48">
+                    <div><strong>Твой</strong><span data-open-status>Открыто ежедневно</span></div>
+                </div>
+                <button type="button" class="mobile-menu-close" id="menuClose" aria-label="Закрыть">
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-times"></use></svg>
+                </button>
+            </div>
             <ul class="mobile-menu-links">
                 <li><a href="#features"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg> Преимущества</a></li>
                 <li><a href="#about"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-store"></use></svg> О нас</a></li>
@@ -655,30 +664,31 @@
         </div>
     </div>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
     <!-- Hero Section -->
     <section class="hero" id="home" data-depth-scene>
-        <div class="hero-shapes" data-parallax data-speed-y="-0.9" data-speed-x="0.28" data-max="280" data-rotate="10" data-scale="0.28" data-depth="80" data-mouse="1.4" data-tilt="7">
+        <div class="hero-shapes" data-parallax data-speed-y="-0.34" data-speed-x="0.16" data-max="110" data-rotate="2" data-scale="0.06" data-depth="30" data-mouse="0.5" data-tilt="2">
             <div class="hero-shape hero-shape-1"></div>
             <div class="hero-shape hero-shape-2"></div>
         </div>
         <div class="hero-depth-field" aria-hidden="true">
-            <span class="depth-plane depth-plane-1" data-parallax data-speed-y="-0.7" data-speed-x="0.42" data-max="260" data-rotate="14" data-scale="0.12" data-depth="140" data-mouse="1.8" data-tilt="11"></span>
-            <span class="depth-plane depth-plane-2" data-parallax data-speed-y="0.48" data-speed-x="-0.34" data-max="220" data-rotate="-11" data-scale="0.1" data-depth="-80" data-mouse="1.1" data-tilt="8"></span>
-            <span class="depth-plane depth-plane-3" data-parallax data-speed-y="-0.36" data-speed-x="0.26" data-max="180" data-rotate="8" data-scale="0.08" data-depth="70" data-mouse="1.35" data-tilt="9"></span>
-            <span class="depth-orbit" data-parallax data-speed-y="-0.52" data-speed-x="0.3" data-max="190" data-rotate="8" data-depth="110" data-mouse="1.25" data-tilt="7"></span>
+            <span class="depth-plane depth-plane-1" data-parallax data-speed-y="-0.24" data-speed-x="0.15" data-max="120" data-rotate="2.4" data-scale="0.04" data-depth="55" data-mouse="0.55" data-tilt="2"></span>
+            <span class="depth-plane depth-plane-2" data-parallax data-speed-y="0.18" data-speed-x="-0.12" data-max="90" data-rotate="-2" data-scale="0.03" data-depth="-30" data-mouse="0.35" data-tilt="1.5"></span>
+            <span class="depth-plane depth-plane-3" data-parallax data-speed-y="-0.16" data-speed-x="0.1" data-max="80" data-rotate="1.6" data-scale="0.02" data-depth="35" data-mouse="0.4" data-tilt="1.5"></span>
+            <span class="depth-orbit" data-parallax data-speed-y="-0.2" data-speed-x="0.12" data-max="100" data-rotate="2" data-depth="45" data-mouse="0.4" data-tilt="1.5"></span>
         </div>
-        <div class="hero-content" data-parallax data-speed-y="0.16" data-speed-x="-0.08" data-max="90" data-rotate="-1.2" data-depth="26" data-mouse="0.35" data-tilt="2">
+        <div class="hero-content">
             <div class="hero-text animate-on-scroll">
                 <div class="hero-eyebrow">
                     <span class="badge-dot"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></span>
-                    5.0 <span class="stars">★★★★★</span> на 2Gis
+                    <span>5.0</span> <span class="stars">★★★★★</span> на картах
                 </div>
                 <h1>
-                    <span class="highlight">Качественные продукты</span><br>
-                    рядом с домом в Поповке
+                    Всё нужное.<br>
+                    <span class="highlight">Совсем рядом.</span><br>
+                    <span class="hero-place">В Поповке.</span>
                 </h1>
-                <p>Свежие продукты, качественные товары и приятный сервис каждый день в продуктовом магазине «Твой» — село Поповка, Алексинский район, Тульская область.</p>
+                <p>Свежие продукты, товары для дома и тот самый соседский сервис — каждый день в магазине «Твой».</p>
                 <div class="hero-cta">
                     <a href="tel:+79029093879" class="btn btn-primary">
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
@@ -689,18 +699,19 @@
                         Как добраться
                     </a>
                 </div>
-                <div class="hero-meta">
+                <div class="hero-meta" aria-label="Основная информация">
                     <div class="hero-meta-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-clock"></use></svg> Ежедневно 8:00–22:00</div>
                     <div class="hero-meta-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-location-dot"></use></svg> ул. Победы, 24</div>
                 </div>
             </div>
             <div class="hero-visual animate-on-scroll">
-                <div class="hero-image-wrapper" data-parallax data-speed-y="-0.22" data-speed-x="0.16" data-max="120" data-rotate="2.8" data-scale="0.04" data-depth="70" data-mouse="1.25" data-tilt="10">
+                <div class="hero-image-wrapper" data-parallax data-speed-y="-0.18" data-speed-x="0.1" data-max="70" data-rotate="1.4" data-scale="0.025" data-depth="45" data-mouse="0.5" data-tilt="2.5">
                     <picture>
-                        <source srcset="tvoy.webp" type="image/webp">
-                        <img src="tvoy-fallback.png" alt="Продуктовый магазин Твой в селе Поповка - витрина и товары" class="hero-image" width="480" height="360" loading="eager" fetchpriority="high" data-scroll-fx="photo">
+                        <source srcset="tvoy.webp 750w, tvoy-1600.webp 1600w" sizes="(max-width: 960px) 94vw, 55vw" type="image/webp">
+                        <img src="tvoy-fallback.jpg" srcset="tvoy-fallback.jpg 750w, tvoy-1600.jpg 1600w" sizes="(max-width: 960px) 94vw, 55vw" alt="Продуктовый магазин Твой в селе Поповка - витрина и товары" class="hero-image" width="1600" height="1200" loading="eager" fetchpriority="high" data-scroll-fx="photo">
                     </picture>
-                    <div class="hero-badge" data-parallax data-speed-y="0.42" data-speed-x="-0.18" data-max="90" data-rotate="-4" data-depth="120" data-mouse="1.5" data-tilt="12">
+                    <div class="hero-open-pill"><span class="open-dot" aria-hidden="true"></span><span data-open-status>Открыто ежедневно</span></div>
+                    <div class="hero-badge">
                         <div class="hero-badge-icon">
                             <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-clock"></use></svg>
                         </div>
@@ -710,7 +721,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero-float-cards" data-parallax data-speed-y="-0.48" data-speed-x="0.2" data-max="100" data-rotate="5" data-depth="130" data-mouse="1.55" data-tilt="10">
+                <div class="hero-float-cards">
                     <div class="hero-float-card">
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-car"></use></svg>
                         <span>Парковка</span>
@@ -722,16 +733,19 @@
                 </div>
             </div>
         </div>
+        <a class="hero-scroll-cue" href="#features" aria-label="Листать к преимуществам">
+            <span>Смотреть дальше</span><i aria-hidden="true"></i>
+        </a>
     </section>
 
     <!-- Trust strip -->
-    <div class="trust-strip" aria-label="Ключевые преимущества">
+    <div class="trust-strip" role="list" aria-label="Ключевые преимущества">
         <div class="section-container">
-            <div class="trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-leaf"></use></svg> Свежие продукты каждый день</div>
-            <div class="trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wheelchair"></use></svg> Доступный пандус</div>
-            <div class="trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-car"></use></svg> Есть парковка</div>
-            <div class="trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-umbrella"></use></svg> Беседка для отдыха</div>
-            <div class="trust-item"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-tags"></use></svg> Честные цены</div>
+            <div class="trust-item" role="listitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-leaf"></use></svg> Свежие продукты каждый день</div>
+            <div class="trust-item" role="listitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-wheelchair"></use></svg> Доступный пандус</div>
+            <div class="trust-item" role="listitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-car"></use></svg> Есть парковка</div>
+            <div class="trust-item" role="listitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-umbrella"></use></svg> Беседка для отдыха</div>
+            <div class="trust-item" role="listitem"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-tags"></use></svg> Честные цены</div>
         </div>
     </div>
 
@@ -742,10 +756,11 @@
                 <span class="section-label">
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-heart"></use></svg> Почему выбирают нас
                 </span>
-                <h2 class="section-title" id="features-title">Удобно для вас — магазин «Твой» в Поповке</h2>
-                <p class="section-subtitle">Мы создали комфортные условия для всех наших покупателей</p>
+                <h2 class="section-title" id="features-title">Маленький магазин. Большая забота.</h2>
+                <p class="section-subtitle">Всё, что делает обычную покупку простой, быстрой и по-настоящему приятной</p>
             </div>
-            <div class="features-grid" data-parallax data-speed-y="0.18" data-speed-x="-0.1" data-max="80" data-rotate="-1.5" data-depth="18" data-mouse="0.35" data-tilt="2.5">
+            <div class="swipe-hint" aria-hidden="true"><span>Листайте карточки</span><b>01 — 08</b></div>
+            <div class="features-grid" role="region" aria-roledescription="карусель" aria-label="Преимущества магазина. Используйте стрелки влево и вправо для просмотра">
                 <article class="feature-card animate-on-scroll">
                     <div class="feature-icon">
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-clock"></use></svg>
@@ -808,20 +823,22 @@
 
     <!-- About Section -->
     <section class="about" id="about" aria-labelledby="about-title" data-depth-scene>
-        <div class="about-bg" data-parallax data-speed-y="-0.7" data-speed-x="0.28" data-max="250" data-rotate="-8" data-scale="0.32" data-depth="-60" data-mouse="0.9" data-tilt="6"></div>
-        <div class="about-content" data-parallax data-speed-y="0.18" data-speed-x="-0.12" data-max="100" data-rotate="1.4" data-depth="28" data-mouse="0.45" data-tilt="3">
-            <div class="about-image-wrapper animate-on-scroll" data-parallax data-speed-y="-0.2" data-speed-x="0.12" data-max="110" data-rotate="-2.4" data-scale="0.04" data-depth="60" data-mouse="1.1" data-tilt="9">
-                <picture>
-                    <source srcset="assort.webp" type="image/webp">
-                    <img src="assort.jpg" alt="Свежие продукты и товары в магазине Твой, село Поповка, Тульская область" class="about-image" width="540" height="405" loading="lazy" data-scroll-fx="photo">
+        <div class="about-bg" data-parallax data-speed-y="-0.22" data-speed-x="0.12" data-max="100" data-rotate="-2" data-scale="0.05" data-depth="-25" data-mouse="0.35" data-tilt="1.5"></div>
+        <div class="about-content">
+            <div class="about-image-reveal animate-on-scroll">
+            <div class="about-image-wrapper" data-parallax data-speed-y="-0.15" data-speed-x="0.08" data-max="65" data-rotate="-1.2" data-scale="0.02" data-depth="35" data-mouse="0.4" data-tilt="2">
+                    <picture>
+                    <source srcset="assort.webp 1080w, assort-1600.webp 1600w" sizes="(max-width: 960px) 86vw, 45vw" type="image/webp">
+                    <img src="assort-fallback.jpg" alt="Свежие продукты и товары в магазине Твой, село Поповка, Тульская область" class="about-image" width="1600" height="1200" loading="lazy" decoding="async" data-scroll-fx="photo">
                 </picture>
-                <div class="about-image-overlay" data-parallax data-speed-y="0.36" data-speed-x="-0.14" data-max="82" data-rotate="3" data-depth="95" data-mouse="1.25" data-tilt="8">
+                <div class="about-image-overlay">
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-map-marker"></use></svg>
                     <div>
                         <div class="about-image-overlay-text">с. Поповка</div>
                         <div class="about-image-overlay-sub">Тульская область</div>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="about-text animate-on-scroll">
                 <span class="section-label">О магазине</span>
@@ -864,8 +881,9 @@
                 <h2 class="section-title" id="reviews-title">Что говорят о магазине «Твой»</h2>
                 <p class="section-subtitle">Реальные отзывы наших покупателей на Яндекс Картах</p>
             </div>
-            <div class="reviews-grid" data-parallax data-speed-y="0.2" data-speed-x="-0.14" data-max="90" data-rotate="-1.8" data-depth="24" data-mouse="0.45" data-tilt="3">
-                <a href="https://yandex.ru/maps/org/147961964582/reviews?reviews%5BpublicId%5D=zy89htrptpvehv60r484uyumb8&si=69hu79ey9b6t1mk06efbh8q9a0&utm_source=review" class="review-card animate-on-scroll" target="_blank" rel="noopener" aria-label="Отзыв Станислава">
+            <div class="swipe-hint" aria-hidden="true"><span>Листайте отзывы</span><b>01 — 03</b></div>
+            <div class="reviews-grid" role="region" aria-roledescription="карусель" aria-label="Отзывы покупателей. Используйте стрелки влево и вправо для просмотра">
+                <a href="https://yandex.ru/maps/org/147961964582/reviews?reviews%5BpublicId%5D=zy89htrptpvehv60r484uyumb8&si=69hu79ey9b6t1mk06efbh8q9a0&utm_source=review" class="review-card animate-on-scroll" target="_blank" rel="noopener">
                     <div class="review-stars" aria-label="5 звёзд">
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
@@ -884,8 +902,9 @@
                             </div>
                         </div>
                     </div>
+                    <span class="sr-only">Открыть отзыв на Яндекс Картах, новая вкладка</span>
                 </a>
-                <a href="https://yandex.ru/maps/org/147961964582/reviews?reviews%5BpublicId%5D=6mqkvwk8bppjnvf0yhbjxjm104&si=69hu79ey9b6t1mk06efbh8q9a0&utm_source=review" class="review-card animate-on-scroll" target="_blank" rel="noopener" aria-label="Отзыв Евгения">
+                <a href="https://yandex.ru/maps/org/147961964582/reviews?reviews%5BpublicId%5D=6mqkvwk8bppjnvf0yhbjxjm104&si=69hu79ey9b6t1mk06efbh8q9a0&utm_source=review" class="review-card animate-on-scroll" target="_blank" rel="noopener">
                     <div class="review-stars" aria-label="5 звёзд">
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
@@ -904,8 +923,9 @@
                             </div>
                         </div>
                     </div>
+                    <span class="sr-only">Открыть отзыв на Яндекс Картах, новая вкладка</span>
                 </a>
-                <a href="https://yandex.ru/maps/org/147961964582/reviews?reviews%5BpublicId%5D=ygp9gvwkjedexctd70kwpp8r18&si=69hu79ey9b6t1mk06efbh8q9a0&utm_source=review" class="review-card animate-on-scroll" target="_blank" rel="noopener" aria-label="Отзыв Дмитрия">
+                <a href="https://yandex.ru/maps/org/147961964582/reviews?reviews%5BpublicId%5D=ygp9gvwkjedexctd70kwpp8r18&si=69hu79ey9b6t1mk06efbh8q9a0&utm_source=review" class="review-card animate-on-scroll" target="_blank" rel="noopener">
                     <div class="review-stars" aria-label="5 звёзд">
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
@@ -924,6 +944,7 @@
                             </div>
                         </div>
                     </div>
+                    <span class="sr-only">Открыть отзыв на Яндекс Картах, новая вкладка</span>
                 </a>
             </div>
         </div>
@@ -936,10 +957,10 @@
                 <span class="section-label">
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-map-marked"></use></svg> Найдите нас
                 </span>
-                <h2 class="section-title" id="map-title">Как нас найти в селе Поповка</h2>
-                <p class="section-subtitle">Мы находимся в селе Поповка и всегда рады видеть вас</p>
+                <h2 class="section-title" id="map-title">Мы рядом — заезжайте</h2>
+                <p class="section-subtitle">село Поповка, улица Победы, 24 — каждый день с 8:00 до 22:00</p>
             </div>
-            <div class="map-container" data-parallax data-speed-y="0.18" data-speed-x="0.12" data-max="85" data-rotate="1.6" data-depth="20" data-mouse="0.4" data-tilt="2.8">
+            <div class="map-container">
                 <div class="map-info animate-on-scroll">
                     <div class="info-item">
                         <div class="info-icon">
@@ -986,8 +1007,12 @@
                             <div class="info-value">Пандус • Беседка для отдыха • Вход с животными</div>
                         </div>
                     </div>
+                    <a class="map-route" href="https://yandex.ru/maps/org/147961964582" target="_blank" rel="noopener">
+                        <span>Открыть в Яндекс Картах</span>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-right"></use></svg>
+                    </a>
                 </div>
-                <div class="map-frame animate-on-scroll" id="mapFrame">
+                <div class="map-frame animate-on-scroll" id="mapFrame" aria-live="polite">
                     <button type="button" class="map-facade" id="mapFacadeBtn" aria-label="Показать карту проезда к магазину Твой">
                         <svg class="icon map-facade-icon" aria-hidden="true" focusable="false"><use href="#icon-map-marked"></use></svg>
                         <span class="map-facade-text">Показать карту проезда</span>
@@ -1041,9 +1066,20 @@
     </footer>
 
     <!-- Scroll to top -->
-    <button class="scroll-top" id="scrollTop" aria-label="Наверх">
+    <button type="button" class="scroll-top" id="scrollTop" aria-label="Наверх">
         <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-up"></use></svg>
     </button>
+
+    <nav class="mobile-dock" aria-label="Быстрые действия">
+        <a href="tel:+79029093879">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
+            <span>Позвонить</span>
+        </a>
+        <a href="#map">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-map-marker"></use></svg>
+            <span>Маршрут</span>
+        </a>
+    </nav>
 
     <script>
         (function () {
@@ -1062,6 +1098,7 @@
             var scrollTopBtn = $('scrollTop');
             var mapFrame = $('mapFrame');
             var mapFacadeBtn = $('mapFacadeBtn');
+            var inertTargets = document.querySelectorAll('#nav, main, footer, #scrollTop, .mobile-dock');
 
             var lastFocusedEl = null;
 
@@ -1097,6 +1134,7 @@
             }
 
             function setPointerVars() {
+                if (mobileMQ.matches) return;
                 rootStyle.setProperty('--pointer-light-x', (50 + pointerFx.x * 18).toFixed(2) + '%');
                 rootStyle.setProperty('--pointer-light-y', (50 + pointerFx.y * 14).toFixed(2) + '%');
             }
@@ -1119,13 +1157,15 @@
                 };
             }
 
-            if (scrollFxEnabled) {
+            function collectMotionItems() {
                 parallaxItems = Array.prototype.map.call(document.querySelectorAll('[data-parallax]'), createMotionItem);
                 photoItems = Array.prototype.map.call(document.querySelectorAll('[data-scroll-fx="photo"]'), function (el) {
                     return { el: el, scene: getScene(el), x: 0, y: 0, rx: 0, ry: 0, scale: 1.08 };
                 });
                 allFxItems = parallaxItems.concat(photoItems);
             }
+
+            if (scrollFxEnabled) collectMotionItems();
 
             function sceneProgress(rect, viewportHeight) {
                 var distance = viewportHeight * 0.5 + rect.height * 0.5;
@@ -1156,11 +1196,9 @@
                     return entry;
                 }
 
-                for (i = 0; i < parallaxItems.length; i++) readScene(parallaxItems[i].scene);
-                for (i = 0; i < photoItems.length; i++) readScene(photoItems[i].scene);
-
                 for (i = 0; i < parallaxItems.length; i++) {
                     item = parallaxItems[i];
+                    if (mobile && item.el.offsetParent === null) continue;
                     var sceneData = readScene(item.scene);
                     rect = sceneData.rect;
                     progress = sceneData.progress;
@@ -1203,11 +1241,11 @@
                     active = rect.bottom > -viewportHeight * 0.35 && rect.top < viewportHeight * 1.35;
                     if (!active) continue;
 
-                    targetX = mobile ? 0 : progress * 28 + pointerFx.x * 10;
-                    targetY = progress * (mobile ? -15 : -24) + (mobile ? 0 : pointerFx.y * 7);
-                    targetRX = mobile ? progress * 2.2 : progress * 14 - pointerFx.y * 6;
-                    targetRY = mobile ? 0 : -progress * 8 + pointerFx.x * 8;
-                    targetScale = mobile ? 1.105 : 1.13 - Math.abs(progress) * 0.045;
+                    targetX = mobile ? 0 : progress * 12 + pointerFx.x * 4;
+                    targetY = progress * (mobile ? -9 : -18) + (mobile ? 0 : pointerFx.y * 3);
+                    targetRX = mobile ? 0 : progress * 2.4 - pointerFx.y * 1.2;
+                    targetRY = mobile ? 0 : -progress * 1.8 + pointerFx.x * 1.8;
+                    targetScale = mobile ? 1.045 : 1.075 - Math.abs(progress) * 0.018;
 
                     item.x = lerp(item.x, targetX, smoothing);
                     item.y = lerp(item.y, targetY, smoothing);
@@ -1253,14 +1291,25 @@
             window.addEventListener('orientationchange', resetMotion, { passive: true });
             if (window.visualViewport) window.visualViewport.addEventListener('resize', requestScrollTick, { passive: true });
 
-            if (finePointerMQ.matches) {
-                window.addEventListener('pointermove', function (e) {
-                    pointerFx.tx = clamp((e.clientX / (window.innerWidth || 1) - 0.5) * 2, -1, 1);
-                    pointerFx.ty = clamp((e.clientY / (window.innerHeight || 1) - 0.5) * 2, -1, 1);
-                    requestScrollTick();
-                }, { passive: true });
-                window.addEventListener('pointerleave', resetMotion, { passive: true });
+            function onMobileModeChange(event) {
+                if (event.matches) {
+                    pointerFx.x = pointerFx.y = pointerFx.tx = pointerFx.ty = 0;
+                    rootStyle.removeProperty('--pointer-light-x');
+                    rootStyle.removeProperty('--pointer-light-y');
+                }
+                requestScrollTick();
             }
+
+            if (mobileMQ.addEventListener) mobileMQ.addEventListener('change', onMobileModeChange);
+            else if (mobileMQ.addListener) mobileMQ.addListener(onMobileModeChange);
+
+            window.addEventListener('pointermove', function (e) {
+                if (!finePointerMQ.matches || mobileMQ.matches || reduceMotionMQ.matches) return;
+                pointerFx.tx = clamp((e.clientX / (window.innerWidth || 1) - 0.5) * 2, -1, 1);
+                pointerFx.ty = clamp((e.clientY / (window.innerHeight || 1) - 0.5) * 2, -1, 1);
+                requestScrollTick();
+            }, { passive: true });
+            window.addEventListener('pointerleave', resetMotion, { passive: true });
 
             function disableMotion() {
                 scrollFxEnabled = false;
@@ -1269,19 +1318,39 @@
                 rootStyle.removeProperty('--pointer-light-y');
             }
 
+            function enableMotion() {
+                if (!allFxItems.length) collectMotionItems();
+                scrollFxEnabled = true;
+                requestScrollTick();
+            }
+
             if (reduceMotionMQ.addEventListener) {
                 reduceMotionMQ.addEventListener('change', function (e) {
                     if (e.matches) disableMotion();
+                    else enableMotion();
+                });
+            } else if (reduceMotionMQ.addListener) {
+                reduceMotionMQ.addListener(function (e) {
+                    if (e.matches) disableMotion();
+                    else enableMotion();
                 });
             }
 
             /* ---------- Мобильное меню ---------- */
+            function setPageInert(value) {
+                Array.prototype.forEach.call(inertTargets, function (el) {
+                    el.inert = value;
+                });
+            }
+
             function openMenu() {
                 if (!mobileMenu || !menuToggle) return;
                 lastFocusedEl = document.activeElement;
                 mobileMenu.classList.add('active');
+                mobileMenu.setAttribute('aria-hidden', 'false');
                 menuToggle.classList.add('active');
                 menuToggle.setAttribute('aria-expanded', 'true');
+                setPageInert(true);
                 document.body.style.overflow = 'hidden';
                 if (menuClose) menuClose.focus();
             }
@@ -1291,10 +1360,12 @@
                 mobileMenu.classList.remove('active');
                 menuToggle.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
+                setPageInert(false);
                 document.body.style.overflow = '';
                 if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
                     lastFocusedEl.focus();
                 }
+                mobileMenu.setAttribute('aria-hidden', 'true');
             }
 
             if (menuToggle && mobileMenu) {
@@ -1313,23 +1384,42 @@
                     if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                         closeMenu();
                     }
+
+                    if (e.key === 'Tab' && mobileMenu.classList.contains('active')) {
+                        var focusable = mobileMenu.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+                        if (!focusable.length) return;
+                        var first = focusable[0];
+                        var last = focusable[focusable.length - 1];
+                        if (e.shiftKey && document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        } else if (!e.shiftKey && document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
                 });
 
                 document.querySelectorAll('.mobile-menu-links a').forEach(function (link) {
                     link.addEventListener('click', closeMenu);
                 });
+
+                var desktopMenuMQ = window.matchMedia('(min-width: 961px)');
+                var closeMenuAtDesktop = function (event) {
+                    if (event.matches && mobileMenu.classList.contains('active')) closeMenu();
+                };
+                if (desktopMenuMQ.addEventListener) desktopMenuMQ.addEventListener('change', closeMenuAtDesktop);
+                else if (desktopMenuMQ.addListener) desktopMenuMQ.addListener(closeMenuAtDesktop);
             }
 
             /* ---------- Кнопка «наверх» ---------- */
             if (scrollTopBtn) {
                 scrollTopBtn.addEventListener('click', function () {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: reduceMotionMQ.matches ? 'auto' : 'smooth' });
                 });
             }
 
             /* ---------- Плавный скролл к якорям ---------- */
-            var headerOffset = 90;
-
             document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
                 anchor.addEventListener('click', function (e) {
                     var href = this.getAttribute('href');
@@ -1339,14 +1429,23 @@
                     if (!target) return;
 
                     e.preventDefault();
+                    var isSkipLink = this.classList.contains('skip-link');
+                    var isMobileNavLink = !!this.closest('.mobile-menu-links');
+                    var focusTarget = isSkipLink ? target : (isMobileNavLink ? target.querySelector('h2') : null);
 
                     // Читаем geometry в следующем кадре: если клик по ссылке в мобильном
                     // меню только что закрыл меню (запись стилей), чтение
                     // getBoundingClientRect() сразу после этого вызвало бы
                     // принудительную синхронную компоновку (forced reflow).
                     window.requestAnimationFrame(function () {
+                        var headerOffset = nav ? Math.ceil(nav.getBoundingClientRect().height) + 12 : 90;
                         var position = target.getBoundingClientRect().top + window.scrollY - headerOffset;
-                        window.scrollTo({ top: position, behavior: 'smooth' });
+                        window.scrollTo({ top: position, behavior: reduceMotionMQ.matches ? 'auto' : 'smooth' });
+                        if (focusTarget) {
+                            if (!focusTarget.hasAttribute('tabindex')) focusTarget.setAttribute('tabindex', '-1');
+                            try { focusTarget.focus({ preventScroll: true }); }
+                            catch (err) { focusTarget.focus(); }
+                        }
                     });
 
                     // Обновляем URL без резкого скачка страницы
@@ -1355,6 +1454,7 @@
             });
 
             /* ---------- Анимация появления блоков при скролле ---------- */
+            document.documentElement.classList.add('reveal-ready');
             if ('IntersectionObserver' in window) {
                 var revealObserver = new IntersectionObserver(function (entries, obs) {
                     entries.forEach(function (entry) {
@@ -1386,9 +1486,11 @@
                     iframe.height = '520';
                     iframe.frameBorder = '0';
                     iframe.loading = 'lazy';
+                    iframe.tabIndex = 0;
                     iframe.title = 'Магазин Твой на карте — село Поповка, ул. Победы, 24';
 
                     mapFrame.replaceChildren(iframe);
+                    iframe.focus();
                 }, { once: true });
             }
 
@@ -1397,5 +1499,6 @@
 
         })();
     </script>
+    <script src="premium.js" defer></script>
 </body>
 </html>
