@@ -1747,7 +1747,7 @@ h4 {
     .map-section,
     .footer {
         content-visibility: auto;
-        contain-intrinsic-size: none;
+        contain-intrinsic-size: auto 900px;
     }
 }
 
@@ -1884,61 +1884,29 @@ h4 {
     .faq,
     .map-section { padding: 90px 0 96px; }
 
-    /* A visible slice of the next card makes the swipe affordance obvious. */
+    /* На телефоне карточки идут вертикально: вложенная горизонтальная
+       прокрутка больше не перехватывает жест вниз и не оставляет страницу
+       «залипшей» на отзыве или карточке. */
     .features-grid,
     .reviews-grid {
-        display: flex;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
         gap: 14px;
-        margin-inline: -18px;
-        padding: 0 18px 20px;
-        overflow-x: auto;
-        overflow-y: visible;
-        -webkit-overflow-scrolling: touch;
-        touch-action: pan-x pan-y pinch-zoom;
-        scroll-padding-inline: 18px;
-        scroll-snap-type: x mandatory;
+        margin-inline: 0;
+        padding: 0;
+        overflow: visible;
+        touch-action: auto;
+        scroll-snap-type: none;
         overscroll-behavior: auto;
-        scrollbar-width: none;
     }
-    .features-grid::-webkit-scrollbar,
-    .reviews-grid::-webkit-scrollbar { display: none; }
-
-    .swipe-hint {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-        margin: -20px 0 16px;
-        color: var(--ink-soft);
-        font-size: 10px;
-        font-weight: 800;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-    }
-
-    .swipe-hint span {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-    }
-
-    .swipe-hint span::after {
-        content: "";
-        width: 34px;
-        height: 1px;
-        background: currentColor;
-    }
-
-    .swipe-hint b { color: var(--brand); font-size: 10px; }
+    .swipe-hint { display: none; }
 
     .feature-card {
-        flex: 0 0 min(84vw, 360px);
-        min-height: 320px;
+        width: 100%;
+        min-height: 0;
         padding: 25px;
-        scroll-snap-align: start;
+        scroll-snap-align: none;
     }
-    .feature-card:nth-child(1),
-    .feature-card:nth-child(6) { min-height: 320px; }
     .feature-card h3 { font-size: 25px; }
 
     .about { padding: 94px 0 100px; }
@@ -1953,16 +1921,12 @@ h4 {
 
     .review-card,
     .review-card:nth-child(1) {
-        flex: 0 0 min(86vw, 380px);
-        min-height: 360px;
+        width: 100%;
+        min-height: 0;
         padding: 28px;
-        scroll-snap-align: center;
+        scroll-snap-align: none;
     }
     .review-card:nth-child(1) .review-text { font-size: 22px; }
-
-    /* Горизонтальные подборки не должны перехватывать вертикальный свайп. */
-    .feature-card,
-    .review-card { touch-action: pan-x pan-y pinch-zoom; }
 
     .faq-item summary { min-height: 62px; padding: 16px 18px; font-size: 17px; }
     .faq-item p { padding: 0 18px 18px; font-size: 14px; }
@@ -1975,7 +1939,7 @@ h4 {
     .map-section,
     .footer {
         content-visibility: visible;
-        contain-intrinsic-size: auto;
+        contain-intrinsic-size: none;
     }
 
     main { overflow: visible; }
