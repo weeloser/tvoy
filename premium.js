@@ -153,6 +153,54 @@
         });
     }
 
+    /* Wi‑Fi: раскрываем данные по запросу и даём быстро скопировать пароль. */
+    var wifiToggle = document.getElementById('wifiToggle');
+    var wifiDetails = document.getElementById('wifiDetails');
+    var wifiStatus = document.getElementById('wifiStatus');
+
+    if (wifiToggle && wifiDetails) {
+        wifiToggle.addEventListener('click', function () {
+            var isOpening = wifiDetails.hidden;
+            wifiDetails.hidden = !isOpening;
+            wifiToggle.setAttribute('aria-expanded', String(isOpening));
+        });
+    }
+
+    function fallbackCopy(value) {
+        var field = document.createElement('textarea');
+        field.value = value;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        var copied = false;
+        try { copied = document.execCommand('copy'); } catch (error) { copied = false; }
+        field.remove();
+        return copied;
+    }
+
+    document.querySelectorAll('[data-copy-wifi]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var value = button.getAttribute('data-copy-wifi') || '';
+            var copyPromise = window.isSecureContext && navigator.clipboard
+                ? navigator.clipboard.writeText(value)
+                : Promise.resolve(fallbackCopy(value));
+
+            copyPromise.then(function (result) {
+                var copied = result === undefined || result === true;
+                if (wifiStatus) wifiStatus.textContent = copied ? 'Пароль скопирован' : 'Выделите пароль вручную: tvoyfree';
+                if (copied) {
+                    button.classList.add('is-copied');
+                    window.setTimeout(function () { button.classList.remove('is-copied'); }, 1600);
+                }
+            }).catch(function () {
+                var copied = fallbackCopy(value);
+                if (wifiStatus) wifiStatus.textContent = copied ? 'Пароль скопирован' : 'Пароль: tvoyfree';
+            });
+        });
+    });
+
     /* Останавливаем бесконечные декоративные анимации за пределами экрана. */
     if ('IntersectionObserver' in window) {
         var motionObserver = new IntersectionObserver(function (entries) {
