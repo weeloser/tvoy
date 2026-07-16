@@ -53,7 +53,7 @@
         document.querySelectorAll('.nav-links a[href^="#"], .mobile-menu-links a[href^="#"]')
     );
     var observedSections = Array.prototype.slice.call(
-        document.querySelectorAll('#features, #about, #reviews, #map')
+        document.querySelectorAll('#features, #about, #reviews, #faq, #map')
     );
 
     function markActiveSection(id) {
