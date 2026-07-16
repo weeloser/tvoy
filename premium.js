@@ -153,41 +153,6 @@
         });
     }
 
-    /* Клавиатурная прокрутка мобильных горизонтальных подборок. */
-    var galleryMQ = window.matchMedia('(max-width: 768px)');
-    var galleries = Array.prototype.slice.call(document.querySelectorAll('.features-grid, .reviews-grid'));
-
-    function syncGalleryTabStops() {
-        galleries.forEach(function (gallery) {
-            if (galleryMQ.matches) gallery.setAttribute('tabindex', '0');
-            else gallery.removeAttribute('tabindex');
-        });
-    }
-
-    galleries.forEach(function (gallery) {
-        gallery.addEventListener('keydown', function (event) {
-            if (!galleryMQ.matches) return;
-            var nextLeft = gallery.scrollLeft;
-            var step = Math.max(240, gallery.clientWidth * 0.78);
-
-            if (event.key === 'ArrowRight') nextLeft += step;
-            else if (event.key === 'ArrowLeft') nextLeft -= step;
-            else if (event.key === 'Home') nextLeft = 0;
-            else if (event.key === 'End') nextLeft = gallery.scrollWidth;
-            else return;
-
-            event.preventDefault();
-            gallery.scrollTo({
-                left: nextLeft,
-                behavior: reduceMotion.matches ? 'auto' : 'smooth'
-            });
-        });
-    });
-
-    syncGalleryTabStops();
-    if (galleryMQ.addEventListener) galleryMQ.addEventListener('change', syncGalleryTabStops);
-    else if (galleryMQ.addListener) galleryMQ.addListener(syncGalleryTabStops);
-
     /* Останавливаем бесконечные декоративные анимации за пределами экрана. */
     if ('IntersectionObserver' in window) {
         var motionObserver = new IntersectionObserver(function (entries) {
