@@ -17,6 +17,7 @@ const output = resolve(root, 'dist');
 // image re-encoding. This keeps rendering identical and makes deploys smaller.
 const publicFiles = [
   'index.html',
+  'produkty.html',
   'premium.css',
   'premium.js',
   'logo-sm.jpg',

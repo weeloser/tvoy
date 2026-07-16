@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Твой продукты в Поповке — ассортимент магазина</title>
+  <meta name="description" content="Твой — продукты и товары для дома в селе Поповка Алексинского района: напитки, сладости, выпечка, товары на каждый день и удобный график 8:00–22:00.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://tvoy.netlify.app/produkty.html">
+  <link rel="stylesheet" href="premium.css">
+  <link rel="preload" as="image" href="assort-1600.webp" type="image/webp" fetchpriority="high">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tvoy.netlify.app/produkty.html">
+  <meta property="og:title" content="Твой продукты в Поповке — ассортимент магазина">
+  <meta property="og:description" content="Продукты и товары для дома в магазине «Твой» в селе Поповка Тульской области.">
+  <meta property="og:image" content="https://tvoy.netlify.app/assort-1600.webp">
+  <meta property="og:locale" content="ru_RU">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://tvoy.netlify.app/produkty.html#collection",
+    "url": "https://tvoy.netlify.app/produkty.html",
+    "name": "Твой продукты в Поповке — ассортимент магазина",
+    "description": "Продукты и товары для дома в магазине «Твой» в селе Поповка Тульской области.",
+    "inLanguage": "ru-RU",
+    "isPartOf": {"@type": "WebSite", "@id": "https://tvoy.netlify.app/#website", "name": "Магазин «Твой»", "url": "https://tvoy.netlify.app/"},
+    "about": {"@id": "https://tvoy.netlify.app/#localbusiness"},
+    "breadcrumb": {"@id": "https://tvoy.netlify.app/produkty.html#breadcrumb"},
+    "primaryImageOfPage": "https://tvoy.netlify.app/assort-1600.webp"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "https://tvoy.netlify.app/produkty.html#breadcrumb",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Магазин «Твой»", "item": "https://tvoy.netlify.app/"},
+      {"@type": "ListItem", "position": 2, "name": "Продукты", "item": "https://tvoy.netlify.app/produkty.html"}
+    ]
+  }
+  </script>
+  <style>
+    .catalog-page{min-height:100vh;background:var(--cream);padding:32px 0 72px}
+    .catalog-shell{max-width:1080px;margin:0 auto;padding:0 24px}
+    .catalog-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:48px}
+    .catalog-brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:22px;color:var(--green-900)}
+    .catalog-brand img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+    .catalog-back{display:inline-flex;align-items:center;gap:8px;color:var(--green-700);font-weight:800}
+    .catalog-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;margin-bottom:64px}
+    .catalog-kicker{display:inline-flex;padding:8px 16px;border-radius:100px;background:var(--green-100);color:var(--green-700);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin-bottom:18px}
+    .catalog-hero h1{font-size:clamp(36px,5vw,58px);margin-bottom:20px}
+    .catalog-hero h1 span{color:var(--green-700)}
+    .catalog-lead{font-size:18px;color:var(--ink-700);max-width:560px}
+    .catalog-image{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-xl);background:var(--cream-deep)}
+    .catalog-image img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+    .catalog-section{margin:64px 0}
+    .catalog-section h2{font-size:clamp(28px,3.5vw,42px);margin-bottom:14px}
+    .catalog-section-intro{color:var(--ink-500);font-size:17px;max-width:720px;margin-bottom:28px}
+    .catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .catalog-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow-sm)}
+    .catalog-card h3{font-family:var(--font-body);font-size:18px;font-weight:800;color:var(--ink-900);margin-bottom:8px}
+    .catalog-card p{font-size:15px;color:var(--ink-500)}
+    .catalog-note{margin-top:28px;padding:18px 20px;background:var(--amber-100);border-radius:var(--radius-md);color:var(--ink-700);font-size:14px}
+    .catalog-contact{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:24px}
+    .catalog-faq{display:grid;gap:12px;max-width:820px}
+    .catalog-faq details{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:18px 20px}
+    .catalog-faq summary{cursor:pointer;font-weight:800;color:var(--ink-900)}
+    .catalog-faq p{margin-top:10px;color:var(--ink-700)}
+    .catalog-footer{border-top:1px solid var(--gray-200);padding-top:28px;margin-top:64px;color:var(--ink-500);font-size:14px}
+    @media (max-width:760px){.catalog-page{padding-top:20px}.catalog-shell{padding:0 18px}.catalog-top{margin-bottom:34px}.catalog-hero{grid-template-columns:1fr;gap:28px;margin-bottom:44px}.catalog-grid{grid-template-columns:1fr}.catalog-section{margin:44px 0}.catalog-hero h1{font-size:clamp(34px,10vw,48px)}}
+  </style>
+</head>
+<body>
+  <main class="catalog-page">
+    <div class="catalog-shell">
+      <header class="catalog-top">
+        <a class="catalog-brand" href="index.html" aria-label="Вернуться на главную магазина «Твой»">
+          <img src="logo-sm.jpg" alt="Логотип магазина «Твой»" width="48" height="48">
+          <span>Магазин «Твой»</span>
+        </a>
+        <a class="catalog-back" href="index.html">На главную →</a>
+      </header>
+
+      <section class="catalog-hero" aria-labelledby="catalog-title">
+        <div>
+          <div class="catalog-kicker">Продукты в Поповке</div>
+          <h1 id="catalog-title">Продукты в магазине <span>«Твой»</span></h1>
+          <p class="catalog-lead">Магазин у дома в селе Поповка Алексинского района Тульской области. Здесь можно купить продукты на каждый день и нужные товары для дома без поездки в город.</p>
+          <div class="catalog-contact">
+            <a class="btn btn-primary" href="tel:+79029093879">Позвонить в магазин</a>
+            <a class="btn btn-secondary" href="https://yandex.ru/maps/org/147961964582" target="_blank" rel="noopener">Открыть на карте</a>
+          </div>
+        </div>
+        <figure class="catalog-image">
+          <img src="assort-fallback.jpg" srcset="assort-fallback.jpg 750w, assort-1600.webp 1600w" sizes="(max-width:760px) 100vw, 48vw" alt="Ассортимент продуктов в магазине «Твой» в селе Поповка" width="1600" height="1200" fetchpriority="high">
+        </figure>
+      </section>
+
+      <section class="catalog-section" aria-labelledby="categories-title">
+        <h2 id="categories-title">Какие продукты есть в «Твой»</h2>
+        <p class="catalog-section-intro">Ассортимент меняется по поставкам, поэтому наличие конкретной позиции лучше уточнить по телефону. Основные группы товаров, за которыми заходят жители Поповки:</p>
+        <div class="catalog-grid">
+          <article class="catalog-card"><h3>Продукты на каждый день</h3><p>Базовые продукты для завтрака, обеда и ужина, бакалея и товары для домашней кухни.</p></article>
+          <article class="catalog-card"><h3>Напитки и сладости</h3><p>Напитки, чай, кофе, сладости и небольшие покупки к дороге или встрече с друзьями.</p></article>
+          <article class="catalog-card"><h3>Выпечка и перекус</h3><p>Свежая выпечка и продукты для быстрого перекуса — удобно купить по пути домой.</p></article>
+          <article class="catalog-card"><h3>Рыба, мясо и молочные продукты</h3><p>Повседневные продукты для холодильника. Наличие отдельных позиций зависит от поставки.</p></article>
+          <article class="catalog-card"><h3>Сезонные овощи и фрукты</h3><p>Сезонные товары появляются в ассортименте в течение года, когда идут соответствующие поставки.</p></article>
+          <article class="catalog-card"><h3>Товары для дома</h3><p>Полезные мелочи, которые нужны дома каждый день, чтобы не ехать за ними далеко.</p></article>
+        </div>
+        <p class="catalog-note">Цены и наличие меняются. Если вам нужен конкретный продукт, позвоните в магазин перед поездкой: <a href="tel:+79029093879">+7 902 909-38-79</a>.</p>
+      </section>
+
+      <section class="catalog-section" aria-labelledby="visit-title">
+        <h2 id="visit-title">Где купить продукты «Твой»</h2>
+        <p class="catalog-section-intro">Адрес магазина: село Поповка, улица Победы, 24, Алексинский район, Тульская область. Работаем ежедневно с 8:00 до 22:00. У магазина есть парковка и пандус.</p>
+        <div class="catalog-contact">
+          <a class="btn btn-primary" href="https://yandex.ru/maps/org/147961964582" target="_blank" rel="noopener">Построить маршрут</a>
+          <a class="btn btn-secondary" href="index.html#map">Посмотреть контакты</a>
+        </div>
+      </section>
+
+      <section class="catalog-section" aria-labelledby="questions-title">
+        <h2 id="questions-title">Вопросы о продуктах и магазине</h2>
+        <div class="catalog-faq">
+          <details><summary>Можно ли узнать наличие товара заранее?</summary><p>Да. Позвоните по номеру <a href="tel:+79029093879">+7 902 909-38-79</a>, и продавец подскажет по текущему наличию.</p></details>
+          <details><summary>Когда открыт магазин «Твой»?</summary><p>Каждый день без выходных, с 8:00 до 22:00.</p></details>
+          <details><summary>Где находится магазин продуктов в Поповке?</summary><p>Село Поповка, улица Победы, 24, Алексинский район, Тульская область.</p></details>
+        </div>
+      </section>
+
+      <footer class="catalog-footer">
+        <p>Магазин «Твой» — продукты и товары для дома в Поповке. <a href="index.html">Вернуться на главную</a>.</p>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
