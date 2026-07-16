@@ -1747,7 +1747,7 @@ h4 {
     .map-section,
     .footer {
         content-visibility: auto;
-        contain-intrinsic-size: auto 900px;
+        contain-intrinsic-size: none;
     }
 }
 
