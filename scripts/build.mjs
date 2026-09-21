@@ -19,6 +19,7 @@ const publicFiles = [
   'index.html',
   'produkty.html',
   'premium.css',
+  'catalog.css',
   'premium.js',
   'logo-sm.jpg',
   'logo_full.jpg',
@@ -36,8 +37,10 @@ const publicFiles = [
 ];
 
 const publicSet = new Set(publicFiles);
-const html = await readFile(resolve(root, 'index.html'), 'utf8');
-const css = await readFile(resolve(root, 'premium.css'), 'utf8');
+const pages = await Promise.all(['index.html', 'produkty.html'].map(async (name) => ({ name, html: await readFile(resolve(root, name), 'utf8') })));
+let html;
+const localReferences = new Set();
+const css = (await Promise.all(['premium.css', 'catalog.css'].map(name => readFile(resolve(root, name), 'utf8')))).join('\n');
 const js = await readFile(resolve(root, 'premium.js'), 'utf8');
 const problems = [];
 
@@ -76,31 +79,44 @@ function stripCssStringsAndComments(value) {
     .replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g, '');
 }
 
-for (const tag of [
-  'html', 'head', 'body', 'main', 'section', 'div', 'nav',
-  'footer', 'article', 'a', 'button', 'picture', 'script', 'style',
-]) {
-  const opened = (html.match(new RegExp(`<${tag}\\b`, 'gi')) || []).length;
-  const closed = (html.match(new RegExp(`</${tag}>`, 'gi')) || []).length;
-  if (opened !== closed) problems.push(`Нарушен баланс <${tag}>: ${opened}/${closed}`);
-}
+for (const page of pages) {
+  html = page.html;
+  const problemStart = problems.length;
+  for (const tag of [
+    'html', 'head', 'body', 'main', 'section', 'div', 'nav',
+    'footer', 'article', 'a', 'button', 'picture', 'script', 'style',
+  ]) {
+    const opened = (html.match(new RegExp(`<${tag}\\b`, 'gi')) || []).length;
+    const closed = (html.match(new RegExp(`</${tag}>`, 'gi')) || []).length;
+    if (opened !== closed) problems.push(`Нарушен баланс <${tag}>: ${opened}/${closed}`);
+  }
 
-const ids = [...html.matchAll(/\bid=["']([^"']+)["']/gi)].map((match) => match[1]);
-const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
-if (duplicateIds.length) problems.push(`Повторяющиеся id: ${duplicateIds.join(', ')}`);
+  const ids = [...html.matchAll(/\bid=["']([^"']+)["']/gi)].map((match) => match[1]);
+  const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+  if (duplicateIds.length) problems.push(`Повторяющиеся id: ${duplicateIds.join(', ')}`);
 
-const idSet = new Set(ids);
-for (const match of html.matchAll(/\b(?:href|aria-controls)=["']#([^"']+)["']/gi)) {
-  if (!idSet.has(match[1])) problems.push(`Не найден якорь #${match[1]}`);
-}
+  const idSet = new Set(ids);
+  for (const match of html.matchAll(/\bhref=["']#([^"']+)["']/gi)) {
+    if (!idSet.has(match[1])) problems.push(`Не найден якорь #${match[1]}`);
+  }
 
-for (const [, attributes, source] of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)) {
-  if (/\bsrc=/i.test(attributes)) continue;
-  try {
-    if (/application\/ld\+json/i.test(attributes)) JSON.parse(source);
-    else new Function(source);
-  } catch (error) {
-    problems.push(`Некорректный inline script: ${error.message}`);
+  for (const match of html.matchAll(/\baria-controls=["']([^"']+)["']/gi)) {
+    for (const id of match[1].split(/\s+/)) if (!idSet.has(id)) problems.push(`Не найден aria-controls ${id}`);
+  }
+
+  for (const [, attributes, source] of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    if (/\bsrc=/i.test(attributes)) continue;
+    try {
+      if (/application\/ld\+json/i.test(attributes)) JSON.parse(source);
+      else new Function(source);
+    } catch (error) {
+      problems.push(`Некорректный inline script: ${error.message}`);
+    }
+  }
+
+  for (const reference of collectLocalReferences()) localReferences.add(reference);
+  for (let index = problemStart; index < problems.length; index++) {
+    problems[index] = `${page.name}: ${problems[index]}`;
   }
 }
 
@@ -115,7 +131,6 @@ const cssOpened = (cleanCss.match(/{/g) || []).length;
 const cssClosed = (cleanCss.match(/}/g) || []).length;
 if (cssOpened !== cssClosed) problems.push(`Нарушен баланс CSS: ${cssOpened}/${cssClosed}`);
 
-const localReferences = collectLocalReferences();
 for (const reference of localReferences) {
   if (!publicSet.has(reference)) {
     problems.push(`Локальный ресурс не включён в deploy: ${reference}`);
@@ -137,6 +152,8 @@ if (problems.length) {
   process.exit(1);
 }
 
+// Never recursively remove a path outside this project's generated output.
+if (output !== resolve(root, 'dist') || dirname(output) !== root) throw new Error('Unsafe output path');
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 
@@ -161,7 +178,7 @@ for (const file of publicFiles) {
   totalBytes += destinationBuffer.byteLength;
 }
 
-console.log(`✓ Проверено локальных ссылок: ${localReferences.length}`);
+console.log(`✓ Проверено локальных ссылок: ${localReferences.size}`);
 console.log(`✓ Production-файлов: ${publicFiles.length}`);
 console.log(`✓ Размер deploy: ${(totalBytes / 1024 / 1024).toFixed(2)} MiB`);
 console.log('✓ Все опубликованные файлы побайтно идентичны исходникам');

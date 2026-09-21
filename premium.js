@@ -1,10 +1,182 @@
 (function () {
     'use strict';
 
+    /**
+     * Небольшой помощник: безопасно получить элемент и ничего не сломать,
+     * если его вдруг нет на странице.
+     */
+    function $(id) { return document.getElementById(id); }
+
+    var nav = $('nav');
+    var menuToggle = $('menuToggle');
+    var mobileMenu = $('mobileMenu');
+    var menuClose = $('menuClose');
+    var scrollTopBtn = $('scrollTop');
+    var mapFrame = $('mapFrame');
+    var mapFacadeBtn = $('mapFacadeBtn');
+    var inertTargets = document.querySelectorAll('#nav, main, footer, #scrollTop, .mobile-dock');
+
+    var lastFocusedEl = null;
+
+    var reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var ticking = false;
+    function onScrollFrame() {
+        if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+        if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+        ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(onScrollFrame); }
+    }, { passive: true });
+
+    /* ---------- Мобильное меню ---------- */
+    function setPageInert(value) {
+        Array.prototype.forEach.call(inertTargets, function (el) {
+            el.inert = value;
+        });
+    }
+
+    function openMenu() {
+        if (!mobileMenu || !menuToggle) return;
+        lastFocusedEl = document.activeElement;
+        mobileMenu.classList.add('active');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        menuToggle.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        setPageInert(true);
+        document.body.style.overflow = 'hidden';
+        if (menuClose) menuClose.focus();
+    }
+
+    function closeMenu() {
+        if (!mobileMenu || !menuToggle) return;
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        setPageInert(false);
+        document.body.style.overflow = '';
+        if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+            lastFocusedEl.focus();
+        }
+        mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function () {
+            mobileMenu.classList.contains('active') ? closeMenu() : openMenu();
+        });
+
+        if (menuClose) menuClose.addEventListener('click', closeMenu);
+
+        mobileMenu.addEventListener('click', function (e) {
+            if (e.target === mobileMenu) closeMenu();
+        });
+
+        // Закрытие по Esc — доступность важна не меньше красоты
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+
+            if (e.key === 'Tab' && mobileMenu.classList.contains('active')) {
+                var focusable = mobileMenu.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+                if (!focusable.length) return;
+                var first = focusable[0];
+                var last = focusable[focusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+        document.querySelectorAll('.mobile-menu-links a').forEach(function (link) {
+            link.addEventListener('click', closeMenu);
+        });
+
+        var desktopMenuMQ = window.matchMedia('(min-width: 961px)');
+        var closeMenuAtDesktop = function (event) {
+            if (event.matches && mobileMenu.classList.contains('active')) closeMenu();
+        };
+        if (desktopMenuMQ.addEventListener) desktopMenuMQ.addEventListener('change', closeMenuAtDesktop);
+        else if (desktopMenuMQ.addListener) desktopMenuMQ.addListener(closeMenuAtDesktop);
+    }
+
+    /* ---------- Кнопка «наверх» ---------- */
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: reduceMotionMQ.matches ? 'auto' : 'smooth' });
+        });
+    }
+
+    /* ---------- Плавный скролл к якорям ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+            var href = this.getAttribute('href');
+            if (!href || href === '#') return;
+
+            var target = document.querySelector(href);
+            if (!target) return;
+
+            e.preventDefault();
+            var isSkipLink = this.classList.contains('skip-link');
+            var isMobileNavLink = !!this.closest('.mobile-menu-links');
+            var focusTarget = isSkipLink ? target : (isMobileNavLink ? target.querySelector('h2') : null);
+
+            // Читаем geometry в следующем кадре: если клик по ссылке в мобильном
+            // меню только что закрыл меню (запись стилей), чтение
+            // getBoundingClientRect() сразу после этого вызвало бы
+            // принудительную синхронную компоновку (forced reflow).
+            window.requestAnimationFrame(function () {
+                var headerOffset = nav ? Math.ceil(nav.getBoundingClientRect().height) + 12 : 90;
+                var position = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+                window.scrollTo({ top: position, behavior: reduceMotionMQ.matches ? 'auto' : 'smooth' });
+                if (focusTarget) {
+                    if (!focusTarget.hasAttribute('tabindex')) focusTarget.setAttribute('tabindex', '-1');
+                    try { focusTarget.focus({ preventScroll: true }); }
+                    catch (err) { focusTarget.focus(); }
+                }
+            });
+
+            // Обновляем URL без резкого скачка страницы
+            if (history.pushState) history.pushState(null, '', href);
+        });
+    });
+
+    /* ---------- Карта проезда: подгружаем iframe только по клику ----------
+       Экономит время загрузки и трафик, пока человек не захотел
+       посмотреть карту — вставляем тяжёлый виджет Яндекс.Карт лениво. */
+    if (mapFacadeBtn && mapFrame) {
+        mapFacadeBtn.hidden = false;
+        var mapFallback = $('mapFallback');
+        if (mapFallback) mapFallback.hidden = true;
+        mapFacadeBtn.addEventListener('click', function () {
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://yandex.ru/map-widget/v1/?z=16&ol=biz&oid=147961964582';
+            iframe.width = '100%';
+            iframe.height = '520';
+            iframe.frameBorder = '0';
+            iframe.loading = 'lazy';
+            iframe.tabIndex = 0;
+            iframe.title = 'Магазин Твой на карте — село Поповка, ул. Победы, 24';
+
+            mapFrame.replaceChildren(iframe);
+            iframe.focus();
+        }, { once: true });
+    }
+
+    /* ---------- Первичный расчёт состояний при загрузке ---------- */
+    onScrollFrame();
+
+})();
+
+(function () {
+    'use strict';
+
     var root = document.documentElement;
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-    var cardDepthInstalled = false;
 
     /* Живой статус магазина в московском часовом поясе. */
     function getMoscowMinutes() {
@@ -25,8 +197,8 @@
 
             return hour * 60 + minute;
         } catch (error) {
-            var now = new Date();
-            return now.getHours() * 60 + now.getMinutes();
+            var now = new Date(Date.now() + 3 * 60 * 60 * 1000);
+            return now.getUTCHours() * 60 + now.getUTCMinutes();
         }
     }
 
@@ -66,10 +238,12 @@
     }
 
     if ('IntersectionObserver' in window && observedSections.length) {
-        var sectionObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) markActiveSection(entry.target.id);
+        var sectionObserver = new IntersectionObserver(function () {
+            var current = observedSections.find(function (section) {
+                var bounds = section.getBoundingClientRect();
+                return bounds.top < window.innerHeight * 0.44 && bounds.bottom > window.innerHeight * 0.32;
             });
+            markActiveSection(current ? current.id : '');
         }, {
             rootMargin: '-32% 0px -56% 0px',
             threshold: 0
@@ -77,79 +251,6 @@
 
         observedSections.forEach(function (section) {
             sectionObserver.observe(section);
-        });
-    }
-
-    /* Мягкий локальный tilt — максимум 2.8°, только для точного указателя. */
-    function installCardDepth() {
-        if (cardDepthInstalled || !finePointer.matches || reduceMotion.matches) return;
-        cardDepthInstalled = true;
-
-        document.querySelectorAll('.feature-card, .review-card').forEach(function (card) {
-            var bounds = null;
-            var frame = 0;
-            var pointerX = 0;
-            var pointerY = 0;
-
-            card.classList.add('tilt-card');
-
-            card.addEventListener('pointerenter', function () {
-                if (!finePointer.matches || reduceMotion.matches) return;
-                bounds = card.getBoundingClientRect();
-                card.style.willChange = 'transform';
-            }, { passive: true });
-
-            card.addEventListener('pointermove', function (event) {
-                if (!finePointer.matches || reduceMotion.matches) return;
-                if (!bounds) bounds = card.getBoundingClientRect();
-                pointerX = event.clientX;
-                pointerY = event.clientY;
-
-                if (frame) return;
-                frame = window.requestAnimationFrame(function () {
-                    var x = Math.max(0, Math.min(1, (pointerX - bounds.left) / Math.max(bounds.width, 1)));
-                    var y = Math.max(0, Math.min(1, (pointerY - bounds.top) / Math.max(bounds.height, 1)));
-                    card.style.setProperty('--card-x', (x * 100).toFixed(1) + '%');
-                    card.style.setProperty('--card-y', (y * 100).toFixed(1) + '%');
-                    card.style.setProperty('--tilt-x', ((0.5 - y) * 5.6).toFixed(2) + 'deg');
-                    card.style.setProperty('--tilt-y', ((x - 0.5) * 5.6).toFixed(2) + 'deg');
-                    frame = 0;
-                });
-            }, { passive: true });
-
-            card.addEventListener('pointerleave', function () {
-                if (frame) window.cancelAnimationFrame(frame);
-                frame = 0;
-                bounds = null;
-                card.style.removeProperty('--tilt-x');
-                card.style.removeProperty('--tilt-y');
-                card.style.removeProperty('will-change');
-            }, { passive: true });
-        });
-    }
-
-    installCardDepth();
-
-    function resetCardDepthStyles() {
-        document.querySelectorAll('.tilt-card').forEach(function (card) {
-            card.style.removeProperty('--tilt-x');
-            card.style.removeProperty('--tilt-y');
-            card.style.removeProperty('will-change');
-        });
-    }
-
-    function onReducedMotionChange(event) {
-        if (event.matches) resetCardDepthStyles();
-        else installCardDepth();
-    }
-
-    if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', onReducedMotionChange);
-    else if (reduceMotion.addListener) reduceMotion.addListener(onReducedMotionChange);
-
-    if (finePointer.addEventListener) {
-        finePointer.addEventListener('change', function (event) {
-            if (event.matches) installCardDepth();
-            else resetCardDepthStyles();
         });
     }
 
@@ -201,21 +302,7 @@
         });
     });
 
-    /* Останавливаем бесконечные декоративные анимации за пределами экрана. */
-    if ('IntersectionObserver' in window) {
-        var motionObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                entry.target.classList.toggle('motion-paused', !entry.isIntersecting);
-            });
-        }, { rootMargin: '180px 0px', threshold: 0 });
-
-        document.querySelectorAll('.hero, .about, .reviews').forEach(function (scene) {
-            motionObserver.observe(scene);
-        });
-    }
-
     document.addEventListener('visibilitychange', function () {
-        root.classList.toggle('page-hidden', document.hidden);
         if (!document.hidden) updateOpenStatus();
     });
 })();

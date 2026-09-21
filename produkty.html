@@ -8,7 +8,11 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://tvoy.netlify.app/produkty.html">
   <link rel="stylesheet" href="premium.css">
-  <link rel="preload" as="image" href="assort-1600.webp" type="image/webp" fetchpriority="high">
+  <link rel="icon" type="image/jpeg" href="logo-sm.jpg">
+  <meta name="theme-color" content="#ba2925">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tvoy.netlify.app/produkty.html">
   <meta property="og:title" content="Твой продукты в Поповке — ассортимент магазина">
@@ -41,39 +45,11 @@
     ]
   }
   </script>
-  <style>
-    .catalog-page{min-height:100vh;background:var(--cream);padding:32px 0 72px}
-    .catalog-shell{max-width:1080px;margin:0 auto;padding:0 24px}
-    .catalog-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:48px}
-    .catalog-brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:22px;color:var(--green-900)}
-    .catalog-brand img{width:48px;height:48px;border-radius:50%;object-fit:cover}
-    .catalog-back{display:inline-flex;align-items:center;gap:8px;color:var(--green-700);font-weight:800}
-    .catalog-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;margin-bottom:64px}
-    .catalog-kicker{display:inline-flex;padding:8px 16px;border-radius:100px;background:var(--green-100);color:var(--green-700);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin-bottom:18px}
-    .catalog-hero h1{font-size:clamp(36px,5vw,58px);margin-bottom:20px}
-    .catalog-hero h1 span{color:var(--green-700)}
-    .catalog-lead{font-size:18px;color:var(--ink-700);max-width:560px}
-    .catalog-image{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-xl);background:var(--cream-deep)}
-    .catalog-image img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
-    .catalog-section{margin:64px 0}
-    .catalog-section h2{font-size:clamp(28px,3.5vw,42px);margin-bottom:14px}
-    .catalog-section-intro{color:var(--ink-500);font-size:17px;max-width:720px;margin-bottom:28px}
-    .catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .catalog-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow-sm)}
-    .catalog-card h3{font-family:var(--font-body);font-size:18px;font-weight:800;color:var(--ink-900);margin-bottom:8px}
-    .catalog-card p{font-size:15px;color:var(--ink-500)}
-    .catalog-note{margin-top:28px;padding:18px 20px;background:var(--amber-100);border-radius:var(--radius-md);color:var(--ink-700);font-size:14px}
-    .catalog-contact{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:24px}
-    .catalog-faq{display:grid;gap:12px;max-width:820px}
-    .catalog-faq details{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:18px 20px}
-    .catalog-faq summary{cursor:pointer;font-weight:800;color:var(--ink-900)}
-    .catalog-faq p{margin-top:10px;color:var(--ink-700)}
-    .catalog-footer{border-top:1px solid var(--gray-200);padding-top:28px;margin-top:64px;color:var(--ink-500);font-size:14px}
-    @media (max-width:760px){.catalog-page{padding-top:20px}.catalog-shell{padding:0 18px}.catalog-top{margin-bottom:34px}.catalog-hero{grid-template-columns:1fr;gap:28px;margin-bottom:44px}.catalog-grid{grid-template-columns:1fr}.catalog-section{margin:44px 0}.catalog-hero h1{font-size:clamp(34px,10vw,48px)}}
-  </style>
+  <link rel="stylesheet" href="catalog.css">
 </head>
 <body>
-  <main class="catalog-page">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <main class="catalog-page" id="main" tabindex="-1">
     <div class="catalog-shell">
       <header class="catalog-top">
         <a class="catalog-brand" href="index.html" aria-label="Вернуться на главную магазина «Твой»">
@@ -94,7 +70,7 @@
           </div>
         </div>
         <figure class="catalog-image">
-          <img src="assort-fallback.jpg" srcset="assort-fallback.jpg 750w, assort-1600.webp 1600w" sizes="(max-width:760px) 100vw, 48vw" alt="Ассортимент продуктов в магазине «Твой» в селе Поповка" width="1600" height="1200" fetchpriority="high">
+          <picture><source srcset="assort.webp 750w, assort-1600.webp 1600w" sizes="(max-width:760px) 92vw, 48vw" type="image/webp"><img src="assort-fallback.jpg" sizes="(max-width:760px) 92vw, 48vw" alt="Ассортимент продуктов в магазине «Твой» в селе Поповка" width="1600" height="1200" fetchpriority="high"></picture>
         </figure>
       </section>
 
